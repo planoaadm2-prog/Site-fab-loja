@@ -82,3 +82,15 @@ Para testar interface local, configure `ADMIN_PASSWORD` com uma senha de desenvo
 `npm test` usa banco temporário e provedor substituto. Valida autenticação, CSRF, dados privados, preço calculado no servidor, reserva/idempotência/estoque insuficiente, assinatura de notificação, rejeição de valor/conta/modo incorretos, aprovação, reembolso e persistência.
 
 Na hospedagem, use exportação/backup do Turso e confirme as condições de retenção do seu plano. Para um banco SQLite local antigo, exporte e valide uma migração antes de mudar sua conexão; não há importação automática desses arquivos para o Turso. Nenhum dado deve ser guardado no disco temporário da Render.
+
+## Venda presencial / balcão
+
+Na gestão protegida `/gestao`, a seção **Nova venda presencial** registra pagamentos já recebidos/conferidos pela equipe, sem depender de uma conta Mercado Pago. Selecione produto, tamanho, quantidade e unidade; adicione as peças e informe dinheiro, Pix, débito ou crédito (1 a 12 parcelas). Informe em reais a taxa efetiva do meio de pagamento, se houver. Dinheiro permite informar o recebido e conferir o troco. Confirme que conferiu o recebimento antes de registrar.
+
+O servidor usa preços e custos do cadastro, verifica novamente o estoque, registra a venda e baixa as peças em uma única transação. Uma mesma tentativa não gera venda duplicada. Produtos não publicados online também podem ser vendidos presencialmente se tiverem estoque. O estoque é **único e compartilhado**, não separado por unidade; a unidade identifica a origem da venda. A implementação não reserva quantidade exclusiva para cada filial.
+
+Vendas físicas aparecem como **Loja física**, com nome da unidade, pagamento e parcelas. Os indicadores presenciais não somam pedidos de teste do site. O resultado presencial deduz custos, taxas informadas e todas as despesas cadastradas, antes de impostos. Parcelamento registra o acordo com a maquininha, sem conciliação bancária ou projeção automática de recebíveis físicos.
+
+O botão **Estornar** em uma venda física devolve as peças ao estoque e exclui os valores dos indicadores. A devolução do dinheiro/Pix/cartão é feita fora do sistema e precisa ser conferida pela equipe; nenhum reembolso é enviado à maquininha. O estorno não emite documento fiscal nem fiscaliza devoluções. O sistema registra operação interna, não cobra cartão, não envia Pix e não emite nota fiscal.
+
+A atualização adiciona somente colunas `channel` e `location` ao histórico de pedidos, preservando pedidos, preços, custos e estoque existentes. Pedidos antigos são classificados como online. Testes de migração, concorrência entre checkout/POS, idempotência, pagamento manual, custo histórico e estorno usam bancos descartáveis.

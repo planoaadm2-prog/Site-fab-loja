@@ -21,3 +21,7 @@ Revisar fotos e dados reais do catálogo, frete/retirada, políticas, conciliaç
 ## Validação
 
 `npm test` para servidor; `node tests/production-ui.cjs` para gestão/vitrine conectada; `node tests/demo.cjs` para a demonstração. Testes usam banco descartável, provedor substituto e dados fictícios. Não executam cobrança no Mercado Pago. Playwright e Chromium são fornecidos pelo ambiente de desenvolvimento.
+
+## Venda presencial adicionada
+
+A gestão possui um balcão para dinheiro/Pix/débito/crédito (até 12 parcelas), identificação da unidade, taxa informada em reais, troco, carrinho por tamanho e confirmação de recebimento pela equipe. Registra a venda e baixa estoque em transação; estorno físico devolve estoque sem executar reembolso bancário. Independe de Mercado Pago. Origem física e site de teste ficam distintas no histórico e nos indicadores. O estoque segue compartilhado entre todas as unidades e o site. Nenhuma venda real é criada pelos testes automatizados; usam banco descartável.
