@@ -42,6 +42,8 @@ O servidor pode iniciar sem Mercado Pago. O checkout fica desativado até config
 | `MP_WEBHOOK_SECRET` | Chave secreta de assinatura dos Webhooks da aplicação. |
 | `MP_COLLECTOR_ID` | Identificador da conta vendedora de teste correspondente ao token. |
 
+Depois de salvar essas variáveis, abra `/gestao` e clique em **Verificar conexão Mercado Pago**. O diagnóstico consulta a conta na API, não cria cobrança e não mostra as credenciais. A presença da chave de webhook não valida sua assinatura; isso requer uma notificação de teste real.
+
 ## Configurar o Mercado Pago
 
 Na aplicação de testes da conta Mercado Pago, configure as notificações de **pagamentos** para:
