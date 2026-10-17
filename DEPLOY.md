@@ -64,7 +64,7 @@ Reservas não são liberadas automaticamente: timeout, abandono e pagamento recu
 
 ## Antes do lançamento comercial
 
-Esta entrega é infraestrutura para homologação, com pagamentos reais bloqueados. Ainda são necessários: homologação do checkout e Webhook na conta, conciliação e ciclo completo das reservas, condições de frete/retirada, políticas comerciais e de privacidade, fotos/dados reais do catálogo, estratégia de backup/exportação e teste de restauração do banco. A equipe precisa validar as condições de taxas e parcelamento na conta Mercado Pago. O financeiro registra taxas retornadas no pagamento; saldo disponível e datas de recebimento devem ser conciliados com os relatórios do provedor.
+O modo padrão permanece sandbox; pagamentos reais exigem a ativação explícita descrita abaixo. Ainda são necessários: homologação do checkout e Webhook na conta, conciliação e ciclo completo das reservas, condições de frete/retirada, políticas comerciais e de privacidade, fotos/dados reais do catálogo, estratégia de backup/exportação e teste de restauração do banco. A equipe precisa validar as condições de taxas e parcelamento na conta Mercado Pago. O financeiro registra taxas retornadas no pagamento; saldo disponível e datas de recebimento devem ser conciliados com os relatórios do provedor.
 
 A gestão tem senha e sessão HttpOnly/Secure/SameSite, bloqueio por tentativas, verificação de origem e dados privados somente no servidor. Não é um sistema multiusuário com permissões individuais ou recuperação automática de senha. Troque `ADMIN_PASSWORD` no ambiente e reinicie para rotacionar o acesso e invalidar sessões.
 
@@ -115,3 +115,14 @@ Após salvar preço/cadastro ou registrar venda/reposição no financeiro, abas 
 A sincronização se aplica à loja hospedada na Render e conectada ao banco. A demonstração independente do GitHub Pages mantém seus próprios dados fictícios. Custo de aquisição é privado e não altera o preço de venda. Alterações no cadastro precisam ser confirmadas pelo botão Salvar mercadoria.
 
 Teste específico: `node tests/catalog-sync.cjs`, com bancos e credenciais locais descartáveis. Cobre mudanças entre abas, mudanças externas sem notificação local, novo produto, reposição, sacola/modal e economia de consultas sem alterações.
+
+
+## Pagamento real (ativação explícita)
+
+Na Render, no serviço da loja, configure `MP_MODE=production`, `MP_ACCESS_TOKEN` com o Access Token de **produção** da aplicação, `MP_COLLECTOR_ID` com o ID da conta vendedora real e `MP_WEBHOOK_SECRET` com a assinatura da configuração de Webhooks de **produção**. Configure o evento Pagamentos para `https://site-fab-loja-1.onrender.com/api/mercadopago/webhook` no ambiente de produção e salve com redeploy. Nunca envie essas chaves em mensagens.
+
+Sem MP_MODE, o padrão é sandbox. Valores diferentes de sandbox/production impedem a inicialização. A produção usa init_point HTTPS do domínio www.mercadopago.com.br, verifica a conta antes de reservar e recusa contas identificadas como test_user. Cada pedido guarda seu modo; os anteriores permanecem sandbox. O webhook exige live_mode correspondente ao pedido, inclusive após mudança de configuração. Não reutilizar identificadores de checkout entre modos.
+
+Após o deploy, verifique o aviso de pagamentos reais na gestão e o botão Pagar com Mercado Pago na sacola. Faça a compra de baixo valor com um comprador diferente da conta vendedora. O pagamento é real e pode ter taxas e valor mínimo conforme o meio escolhido. Confira o pedido Pago e o recebimento no Mercado Pago; o retorno à loja não confirma pagamento. Se precisar devolver, faça o reembolso no Mercado Pago e confira a atualização. Não libere reserva manualmente sem conferir o provedor. Frete não está calculado; a sacola informa retirada a combinar com a loja.
+
+Os testes automatizados cobrem produção com provedor substituto; nenhuma cobrança real foi feita por eles. O painel financeiro exibe vendas online reais e de teste separadamente; resultado presencial continua exclusivo das lojas físicas.

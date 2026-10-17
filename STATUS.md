@@ -12,7 +12,8 @@ Identidade da Virtuosa Beach (logo azul e dourado), layout responsivo, categoria
 
 ## Pendência principal: Mercado Pago
 
-O último resultado enviado pela pessoa usuária confirmou a presença de MP_ACCESS_TOKEN, MP_COLLECTOR_ID e MP_WEBHOOK_SECRET, mas a consulta de autenticação foi recusada pela API (401 ou 403). A causa exata ainda não foi validada. Não declarar token, conta ou webhook válidos. Retomar pela seção “Verificar conexão Mercado Pago” na gestão, com as credenciais de teste configuradas apenas na Render. Não solicitar valores em chat. A conta correspondente e o webhook ainda precisam ser homologados com uma compra de teste. Pagamentos reais continuam bloqueados.
+A pessoa usuária confirmou autenticação e conta correspondentes e relatou sucesso ao configurar Webhooks. Compra ponta a ponta ainda não comprovada. Implementado MP_MODE=production (padrão sandbox), checkout de produção, modo persistido por pedido e validação correspondente no webhook. Pedidos anteriores são preservados como sandbox; financeiro separa pagamentos reais online dos testes. Ativação depende de variáveis de produção e webhook na Render pela pessoa usuária (ver DEPLOY.md). Não houve cobrança real feita pelo agente. Testes locais: 11 aprovados, incluindo checkout de produção com provedor substituto.
+
 
 ## Antes de operação comercial
 
