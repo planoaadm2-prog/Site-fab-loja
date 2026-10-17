@@ -62,3 +62,8 @@ Implementado acompanhamento de novos checkouts via referência privada, endpoint
 ## Galeria de produtos
 
 Implementada foto principal + até 5 adicionais no cadastro/edição, com otimização, prévias e remoção. Banco preserva fotos antigas, preços e estoque; API valida todas as imagens e expõe arrays. Loja mostra quantidade de fotos no card e galeria com miniaturas ao clicar no produto, inclusive celular. 13 testes de servidor passaram; gallery-ui.cjs passou em upload, persistência, remoção, troca de miniaturas e produto sem fotos. Nenhuma imagem real foi adicionada aos produtos publicados: pessoa usuária deve enviar as fotos em Mercadorias.
+
+
+## Publicação rápida em lote
+
+Seleção de mercadorias, selecionar resultados, limpar, filtros No site/Fora do site e botões Publicar selecionadas/Retirar do site. Operação transacional de até 500 IDs apenas altera publicação/compra e auditoria; preserva estoque e histórico. Produtos retirados realmente somem da vitrine; pedidos antigos e venda presencial continuam disponíveis. Atualização local sem baixar fotos novamente e broadcast entre abas. 14 testes do servidor e publication-ui.cjs passaram: múltiplos produtos, filtros, republicação, bloqueio de venda online, venda presencial, atomicidade, sacola/modal sincronizados e celular.

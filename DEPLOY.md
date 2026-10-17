@@ -147,3 +147,12 @@ A tela é da loja, não modifica a interface hospedada pelo Mercado Pago. Após 
 Na gestão → Mercadorias, o cadastro e a edição aceitam uma foto principal e até cinco adicionais. Selecione várias em Mais fotos do produto, confira as prévias e salve a mercadoria. As adicionais podem ser removidas individualmente. JPG/PNG/WebP de até 10 MB por arquivo são otimizadas no navegador; o servidor valida cada imagem final até 512 KB e permite até cinco adicionais. Limite JSON das rotas de cadastro/edição: 4,4 MB. Campos images são persistidos como JSON no banco e apresentados como arrays na API; migração aditiva mantém a imagem existente e o estoque. Clientes antigos que omitem images preservam as fotos extras.
 
 Na loja, cards com fotos adicionais indicam a quantidade e o modal exibe miniaturas clicáveis, contador e imagem em destaque. Produtos sem fotos mantêm a ilustração existente. Nenhuma foto real de produto é inventada: a equipe deve enviá-las pela gestão. Verificação: npm test e node tests/gallery-ui.cjs (fixtures locais, sem alterar catálogo publicado).
+
+
+## Publicar e retirar mercadorias em lote
+
+Gestão → Mercadorias → Mercadorias cadastradas: marque as caixas dos produtos, ou use Selecionar resultados da busca/filtro atual. Publicar selecionadas coloca as mercadorias na vitrine e habilita compras nos tamanhos com saldo; Retirar do site esconde a mercadoria e impede novos checkouts online. Seleções são mantidas ao trocar filtros e o contador inclui todas as selecionadas; Limpar seleção desmarca todas. A ação vale para o produto inteiro, não para unidades/tamanhos específicos.
+
+A rota protegida POST /api/admin/publication recebe ids (1–500 distintos) e published booleano. Valida a existência de todos, atualiza somente published/active e registra auditoria em uma transação; preços, custos, fotos, estoque, pedidos e vendas presenciais são preservados. Migração published=1 preserva a vitrine existente. O checkbox antigo de edição continua controlando compras: ao habilitar, republica o produto; desabilitar sozinho mantém apresentação se já visível. Use Retirar do site para ocultar.
+
+O formulário de lote atualiza a lista sem baixar novamente todas as fotos. A vitrine recebe aviso imediato em abas do mesmo navegador; outros navegadores consultam revisão a cada 15 segundos em primeiro plano, além de ao voltar à aba. Itens retirados são removidos da sacola local e o modal de uma peça retirada fecha. Reservas e pagamentos anteriores continuam válidos e precisam ser tratados pelo fluxo normal. Teste: node tests/publication-ui.cjs.
