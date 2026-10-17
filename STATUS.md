@@ -82,3 +82,8 @@ Botão azul fixo no canto inferior direito, com ícone, quantidade e subtotal si
 ## Pix direto dentro da loja
 
 Implementados /api/pix e /api/pix-status, serviço server/pix.cjs, referência do pagamento persistente e tela de escolha de meio. Pix gera QR/Copia e Cola pela API, sem login do comprador ou redirecionamento, com nome/e-mail/CPF enviados ao processador e não persistidos na loja. Valor/conta/modo/referência validados; idempotência, retomada, cópia, expiração e confirmação no mesmo modal. Cartões seguem Checkout Pro separado. 15 testes aprovados e direct-pix-ui.cjs aprovado com provedor substituto. Nenhuma cobrança real criada pelo agente e QR real ainda precisa ser verificado com as credenciais da conta. Antes de afirmar operação real, confirmar compra no banco, Mercado Pago, financeiro e tela do comprador.
+
+
+## Concha da logo animada
+
+Animação CSS usa uma segunda camada recortada da própria imagem da logo, sem alterar o JPEG original. Apenas a concha balança suavemente e recebe brilho dourado; letras permanecem estáveis. Aplicada no cabeçalho/rodapé e na demonstração. Revisão visual desktop/celular e preferência prefers-reduced-motion conferidas. Nenhuma alteração em dados bancários ou pagamentos nesta tarefa; troca para Sicoob continua dependendo da definição API/chave e dados do recebedor.
