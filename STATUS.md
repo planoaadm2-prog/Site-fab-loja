@@ -42,3 +42,8 @@ Vitrine Render recebe notificações das alterações feitas no financeiro em ou
 ## Endereços unificados
 
 Confirmado no navegador: o preço de teste R$ 1,00 do Biquíni Brisa — Terracota estava correto na Render, enquanto o GitHub Pages ainda exibia R$ 139,90 da demonstração. O endereço raiz antigo do GitHub passa a redirecionar para a loja da Render. A demonstração local independente fica em `/Site-fab-loja/demo.html`. O servidor Render remove o script de redirecionamento do seu template. Não reverter os preços de teste da pessoa usuária sem instrução.
+
+
+## Preparação para a compra real
+
+Consulta pública confirmou servidor saudável, modo production, configuração de pagamento presente e produto b1 por 100 centavos. Isso não comprova uma cobrança ou webhook ponta a ponta. Acabamento da sacola, etapas de acompanhamento em Pagamento online, diagnóstico com cores e etiquetas Reservado/Pago/Estornado revisados em desktop e celular sem overflow. Nenhum pedido ou cobrança criado no ambiente publicado durante a revisão. Validar a compra real na volta da pessoa usuária e conferir recebimento no provedor e status Pago no financeiro.
