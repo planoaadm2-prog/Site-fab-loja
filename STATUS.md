@@ -77,3 +77,8 @@ A inclusão bem-sucedida agora abre confirmação com foto, nome, tamanho, valor
 ## Sacola flutuante
 
 Botão azul fixo no canto inferior direito, com ícone, quantidade e subtotal sincronizados com a sacola existente. Abre a mesma sacola e permanece acessível durante a rolagem; fica oculto enquanto qualquer dialog está aberto. Layout móvel respeita margem inferior segura e reserva espaço ao fim da página. Teste add-to-bag-ui.cjs ampliado e aprovado: abrir pelo flutuante, somar/remover peças, total, fluxo após inclusão e largura no celular. Não houve alteração em pagamentos ou dados publicados.
+
+
+## Pix direto dentro da loja
+
+Implementados /api/pix e /api/pix-status, serviço server/pix.cjs, referência do pagamento persistente e tela de escolha de meio. Pix gera QR/Copia e Cola pela API, sem login do comprador ou redirecionamento, com nome/e-mail/CPF enviados ao processador e não persistidos na loja. Valor/conta/modo/referência validados; idempotência, retomada, cópia, expiração e confirmação no mesmo modal. Cartões seguem Checkout Pro separado. 15 testes aprovados e direct-pix-ui.cjs aprovado com provedor substituto. Nenhuma cobrança real criada pelo agente e QR real ainda precisa ser verificado com as credenciais da conta. Antes de afirmar operação real, confirmar compra no banco, Mercado Pago, financeiro e tela do comprador.
