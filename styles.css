@@ -3,3 +3,6 @@
 
 /* Identidade inspirada no logo fornecido: azul, dourado e fundo claro. */
 .brand{color:#527e9a;font-style:italic}.brand span{color:#92702e;font-style:normal}footer .brand{color:#f5f5ed}footer .brand span{color:#e6cf96}.hero-stamp{color:#fff1cf;border-color:#e6cf96aa}.brand-story .eyebrow,.section-heading .eyebrow,.editorial-copy .eyebrow{color:#886724}
+
+/* Apresenta o logo original em um enquadramento compacto, sem alterar o arquivo. */
+.brand-logo{display:block;position:relative;overflow:hidden;width:210px;height:116px;flex-shrink:0;background:#fffefa;border-radius:4px}.brand-logo img{position:absolute;display:block;width:134%;height:auto;max-width:none;left:-17%;top:-69%}footer .brand-logo{width:210px;height:116px}@media(max-width:560px){.header .brand-logo{width:170px;height:94px}.header{row-gap:18px;padding-top:12px;padding-bottom:18px}}
