@@ -30,4 +30,4 @@ Com Playwright e Chromium disponíveis no ambiente, execute `node tests/demo.cjs
 
 ## Servidor e gestão protegida (homologação)
 
-Foi adicionada uma aplicação Node 24 + SQLite, com gestão autenticada e Checkout Pro em **modo de teste**. Ela roda separadamente da demonstração do GitHub Pages. Veja [DEPLOY.md](DEPLOY.md) para implantação na Render, variáveis seguras, configuração Mercado Pago, limitações e pendências antes de vendas reais. Execute `npm test` para validar o servidor com banco temporário e provedor substituto.
+Foi adicionada uma aplicação Node 24 + Turso/libSQL (SQLite local em desenvolvimento), com gestão autenticada e Checkout Pro em **modo de teste**. Ela roda separadamente da demonstração do GitHub Pages. Veja [DEPLOY.md](DEPLOY.md) para implantação gratuita na Render + Turso, variáveis seguras, configuração Mercado Pago, limitações e pendências antes de vendas reais. Execute `npm test` para validar o servidor com banco temporário e provedor substituto.
