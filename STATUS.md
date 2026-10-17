@@ -52,3 +52,8 @@ Consulta pública confirmou servidor saudável, modo production, configuração 
 ## Ajuste da confirmação Pix
 
 Corrigida validação de parcelas para Pix: aceita ausência/null/0/1, registra Pix com 1x. Webhook aceita timestamps em segundos e milissegundos, mantém HMAC e consulta independente. Novo botão Conferir pagamento na gestão consulta a API oficial e não permite marcar manualmente como pago. 12 testes passaram; teste de navegador confirmou consulta e atualização para Pago/Pix com provedor substituto. Não foi acessada conta privada nem confirmado Pix real. O bloqueio de Gerar código no checkout do provedor segue sem causa comprovada e não é resolvido por essa correção de confirmação.
+
+
+## Confirmação na tela do cliente
+
+Implementado acompanhamento de novos checkouts via referência privada, endpoint mínimo /api/order-status e janela de status na volta do Mercado Pago. Consulta automática em 10 segundos, botão manual, estados pendente/pago/estornado e indicação de teste. Retorno do provedor não prova pagamento. 12 testes do servidor aprovados, incluindo token de acompanhamento inválido/ausente; teste de navegador customer-status.cjs passou com atualização automática, recarga, celular e retorno falso sem aprovação. Sem cobrança real. Para pedidos antigos, conferir na gestão; iniciar novo checkout para testar a tela nova.

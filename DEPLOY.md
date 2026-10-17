@@ -133,3 +133,10 @@ Os testes automatizados cobrem produção com provedor substituto; nenhuma cobra
 O webhook consulta o pagamento na API e só confirma status approved com conta, valor, moeda, referência e modo correspondentes. Pix (payment_method_id=pix, payment_type_id=bank_transfer) sem parcelas ou com 0 é registrado como Pix, 1x. Cartões mantêm a validação de 1 a 6 parcelas.
 
 Em Vendas e financeiro, o botão **Conferir pagamento** consulta o Mercado Pago pelo pedido e busca cada pagamento por ID antes de aplicar as mesmas validações do webhook. A rota exige sessão da equipe e mesma origem; não existe confirmação manual de recebimento online. Sem pagamento registrado/aprovado, o pedido continua Reservado. A consulta não cria cobranças. Pedidos de outro modo não são conciliados com as credenciais atuais. Ainda é necessária uma compra real para comprovar a integração na conta.
+
+
+## Confirmação para o cliente
+
+Novos checkouts retornam à loja com referência privada do pedido no fragmento da URL. A loja remove esse fragmento da barra de endereço e mantém o acompanhamento na sessão do navegador. O cliente vê Aguardando confirmação, Pagamento confirmado ou Pagamento estornado, com valor e identificação curta. A consulta a cada 10 segundos (até 15 minutos em primeiro plano, ou botão Verificar pagamento) lê somente o status validado no banco. Não confirma pelo parâmetro status/retorno do Mercado Pago e não expõe custo, dados pessoais ou credenciais. A referência privada permite apenas consultar aquele pedido e deve ser tratada como privada. Pedidos iniciados antes desta funcionalidade não têm acompanhamento no navegador; a equipe pode conferir no financeiro.
+
+A tela é da loja, não modifica a interface hospedada pelo Mercado Pago. Após pagar Pix, o cliente deve voltar à loja no mesmo navegador; o aviso na sacola orienta esse retorno. Webhook e Conferir pagamento na gestão atualizam o mesmo pedido. Teste de navegador: node tests/customer-status.cjs, sem cobrança real.
