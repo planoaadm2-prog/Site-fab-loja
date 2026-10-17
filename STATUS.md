@@ -57,3 +57,8 @@ Corrigida validação de parcelas para Pix: aceita ausência/null/0/1, registra 
 ## Confirmação na tela do cliente
 
 Implementado acompanhamento de novos checkouts via referência privada, endpoint mínimo /api/order-status e janela de status na volta do Mercado Pago. Consulta automática em 10 segundos, botão manual, estados pendente/pago/estornado e indicação de teste. Retorno do provedor não prova pagamento. 12 testes do servidor aprovados, incluindo token de acompanhamento inválido/ausente; teste de navegador customer-status.cjs passou com atualização automática, recarga, celular e retorno falso sem aprovação. Sem cobrança real. Para pedidos antigos, conferir na gestão; iniciar novo checkout para testar a tela nova.
+
+
+## Galeria de produtos
+
+Implementada foto principal + até 5 adicionais no cadastro/edição, com otimização, prévias e remoção. Banco preserva fotos antigas, preços e estoque; API valida todas as imagens e expõe arrays. Loja mostra quantidade de fotos no card e galeria com miniaturas ao clicar no produto, inclusive celular. 13 testes de servidor passaram; gallery-ui.cjs passou em upload, persistência, remoção, troca de miniaturas e produto sem fotos. Nenhuma imagem real foi adicionada aos produtos publicados: pessoa usuária deve enviar as fotos em Mercadorias.
