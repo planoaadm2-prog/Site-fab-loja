@@ -6,7 +6,7 @@ O GitHub Pages continua exibindo a demonstração local. O servidor autenticado 
 
 1. Acesse https://turso.tech/ e entre/crie sua conta.
 2. Escolha o plano gratuito, crie um banco e copie a **Database URL** (`libsql://...`) e gere um token com acesso ao banco. Não publique nem envie esse token em mensagens.
-3. Guarde esses dois valores para preencher na Render. O servidor cria as tabelas automaticamente na primeira conexão. Produtos começam desativados e com estoque zero.
+3. Guarde esses dois valores para preencher na Render. O servidor cria as tabelas automaticamente na primeira conexão. Produtos começam desativados e com estoque zero; a vitrine mantém os cards de apresentação com a indicação “Em breve”. Publicar um produto no financeiro habilita a compra conforme o estoque.
 
 O banco fica no Turso, não no disco temporário da Render. Reiniciar/reimplantar o servidor não deve apagar pedidos ou estoque. A conexão real ainda deve ser validada após cadastrar URL/token na sua conta; os testes do repositório usam o mesmo cliente e operações com um banco local temporário.
 
