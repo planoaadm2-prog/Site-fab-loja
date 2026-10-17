@@ -29,3 +29,7 @@ A gestão possui um balcão para dinheiro/Pix/débito/crédito (até 12 parcelas
 ## Aba Mercadorias
 
 Cadastro de produtos agora persistido no banco: nome, categoria, descrição, preço, custo, foto otimizada, cor e tamanhos/estoque inicial. Reposição incremental por tamanho com histórico e chave contra duplicação. Edição de metadados/preços/custos sem sobrescrever estoque ou vendas anteriores. Catálogo do site e balcão leem os novos produtos do servidor; não ficam mais limitados à lista estática original. Gestão organizada em quatro abas. Fotos ficam no banco, sem disco pago. Validar com `npm test` e `node tests/merchandise-ui.cjs`; testes não criam produtos na loja real.
+
+## Diagnóstico da conta Mercado Pago
+
+O diagnóstico autenticado mostra agora o ID retornado pela API `/users/me` e um botão para copiá-lo para `MP_COLLECTOR_ID` na Render. Isso evita usar por engano o ID da aplicação ou de outra conta de teste. Não são mostrados token, chave de webhook, e-mail ou nome da conta. A autenticação do token foi aceita no último resultado enviado pela pessoa usuária, mas o collector configurado era diferente; a correspondência ainda precisa ser revalidada após o ajuste.
