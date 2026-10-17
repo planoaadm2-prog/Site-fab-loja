@@ -107,3 +107,11 @@ A gestão tem abas **Venda presencial**, **Mercadorias**, **Vendas e financeiro*
 Novos cadastros ficam automaticamente disponíveis no balcão e no catálogo do site. Sem habilitar compras, aparecem em apresentação (“Em breve”) e não podem ser comprados online. A venda presencial continua possível se houver estoque. O cliente não recebe os custos de aquisição nos endpoints públicos. Produtos não são excluídos pelo painel, preservando o histórico.
 
 A atualização adiciona metadados aos produtos e uma tabela de entradas, preservando os preços, custos, estoques e pedidos existentes. A inicialização não recria nem zera cadastros. Teste de interface completo: `node tests/merchandise-ui.cjs`, com banco descartável e dados fictícios.
+
+## Sincronização da vitrine
+
+Após salvar preço/cadastro ou registrar venda/reposição no financeiro, abas abertas da loja no mesmo navegador recebem uma notificação sem dados privados e buscam os dados atuais. Em outros dispositivos, a vitrine consulta uma revisão opaca a cada 15 segundos enquanto estiver visível, e também ao voltar para a aba. O catálogo com fotos só é baixado novamente quando a revisão muda. Preço na sacola, no card e no detalhe aberto são atualizados sem recarregar o documento; tamanho selecionado é preservado quando ainda disponível.
+
+A sincronização se aplica à loja hospedada na Render e conectada ao banco. A demonstração independente do GitHub Pages mantém seus próprios dados fictícios. Custo de aquisição é privado e não altera o preço de venda. Alterações no cadastro precisam ser confirmadas pelo botão Salvar mercadoria.
+
+Teste específico: `node tests/catalog-sync.cjs`, com bancos e credenciais locais descartáveis. Cobre mudanças entre abas, mudanças externas sem notificação local, novo produto, reposição, sacola/modal e economia de consultas sem alterações.

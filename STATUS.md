@@ -33,3 +33,7 @@ Cadastro de produtos agora persistido no banco: nome, categoria, descrição, pr
 ## Diagnóstico da conta Mercado Pago
 
 O diagnóstico autenticado mostra agora o ID retornado pela API `/users/me` e um botão para copiá-lo para `MP_COLLECTOR_ID` na Render. Isso evita usar por engano o ID da aplicação ou de outra conta de teste. Não são mostrados token, chave de webhook, e-mail ou nome da conta. A autenticação do token foi aceita no último resultado enviado pela pessoa usuária, mas o collector configurado era diferente; a correspondência ainda precisa ser revalidada após o ajuste.
+
+## Sincronização automática da loja
+
+Vitrine Render recebe notificações das alterações feitas no financeiro em outras abas do mesmo navegador e confere versão do catálogo a cada 15s quando visível para mudanças de outros dispositivos. Usa `/api/catalog-version` com revisão opaca, baixando fotos/catálogo completo somente quando necessário. Atualiza cards, sacola e detalhe aberto. A demonstração GitHub continua independente. Teste dedicado: `node tests/catalog-sync.cjs`.
