@@ -72,3 +72,8 @@ Seleção de mercadorias, selecionar resultados, limpar, filtros No site/Fora do
 ## Próximo passo após adicionar à sacola
 
 A inclusão bem-sucedida agora abre confirmação com foto, nome, tamanho, valor e quantidade total. Ir para a sacola fecha a confirmação e abre a sacola; Escolher mais produtos, fechar ou Escape retorna à vitrine preservando busca/filtro e direcionando o foco à peça. Layout revisado no celular e desktop. Teste tests/add-to-bag-ui.cjs passou nos dois caminhos, quantidade, Escape e limite de estoque; 14 testes de servidor aprovados. Cenários de navegador existentes ajustados para reconhecer a nova escolha após inclusão. Nenhum pagamento criado.
+
+
+## Sacola flutuante
+
+Botão azul fixo no canto inferior direito, com ícone, quantidade e subtotal sincronizados com a sacola existente. Abre a mesma sacola e permanece acessível durante a rolagem; fica oculto enquanto qualquer dialog está aberto. Layout móvel respeita margem inferior segura e reserva espaço ao fim da página. Teste add-to-bag-ui.cjs ampliado e aprovado: abrir pelo flutuante, somar/remover peças, total, fluxo após inclusão e largura no celular. Não houve alteração em pagamentos ou dados publicados.
