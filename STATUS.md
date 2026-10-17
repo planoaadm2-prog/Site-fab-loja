@@ -67,3 +67,8 @@ Implementada foto principal + até 5 adicionais no cadastro/edição, com otimiz
 ## Publicação rápida em lote
 
 Seleção de mercadorias, selecionar resultados, limpar, filtros No site/Fora do site e botões Publicar selecionadas/Retirar do site. Operação transacional de até 500 IDs apenas altera publicação/compra e auditoria; preserva estoque e histórico. Produtos retirados realmente somem da vitrine; pedidos antigos e venda presencial continuam disponíveis. Atualização local sem baixar fotos novamente e broadcast entre abas. 14 testes do servidor e publication-ui.cjs passaram: múltiplos produtos, filtros, republicação, bloqueio de venda online, venda presencial, atomicidade, sacola/modal sincronizados e celular.
+
+
+## Próximo passo após adicionar à sacola
+
+A inclusão bem-sucedida agora abre confirmação com foto, nome, tamanho, valor e quantidade total. Ir para a sacola fecha a confirmação e abre a sacola; Escolher mais produtos, fechar ou Escape retorna à vitrine preservando busca/filtro e direcionando o foco à peça. Layout revisado no celular e desktop. Teste tests/add-to-bag-ui.cjs passou nos dois caminhos, quantidade, Escape e limite de estoque; 14 testes de servidor aprovados. Cenários de navegador existentes ajustados para reconhecer a nova escolha após inclusão. Nenhum pagamento criado.
