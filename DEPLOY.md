@@ -54,7 +54,7 @@ https://SEU-ENDERECO-NA-RENDER/api/mercadopago/webhook
 
 Use a chave secreta da configuração de Webhooks em `MP_WEBHOOK_SECRET`, e a conta vendedora/compradora de teste conforme as instruções atuais do Mercado Pago. O servidor usa `sandbox_init_point`, limita o checkout a até 6 parcelas e aceita confirmações apenas com `live_mode: false`. A definição comercial de parcelamento/juros depende das condições configuradas na conta; esta versão não promete crédito sem juros na operação do provedor.
 
-As notificações são validadas por HMAC (`x-signature`, `x-request-id`, `data.id`) com tolerância de 10 minutos. A confirmação é consultada novamente na API oficial; conta recebedora, moeda, referência, valor e modo de teste são conferidos. Não há confiança no retorno do navegador. A integração **ainda precisa de homologação ponta a ponta com as credenciais da conta**; os testes automatizados usam um provedor substituto, não fazem uma compra no Mercado Pago.
+As notificações são validadas por HMAC (`x-signature`, `x-request-id`, `data.id`) com tolerância de 10 minutos (timestamp em segundos ou milissegundos). A confirmação é consultada novamente na API oficial; conta recebedora, moeda, referência, valor e modo de teste são conferidos. Não há confiança no retorno do navegador. A integração **ainda precisa de homologação ponta a ponta com as credenciais da conta**; os testes automatizados usam um provedor substituto, não fazem uma compra no Mercado Pago.
 
 ## Como funciona o estoque
 
@@ -126,3 +126,10 @@ Sem MP_MODE, o padrão é sandbox. Valores diferentes de sandbox/production impe
 Após o deploy, verifique o aviso de pagamentos reais na gestão e o botão Pagar com Mercado Pago na sacola. Faça a compra de baixo valor com um comprador diferente da conta vendedora. O pagamento é real e pode ter taxas e valor mínimo conforme o meio escolhido. Confira o pedido Pago e o recebimento no Mercado Pago; o retorno à loja não confirma pagamento. Se precisar devolver, faça o reembolso no Mercado Pago e confira a atualização. Não libere reserva manualmente sem conferir o provedor. Frete não está calculado; a sacola informa retirada a combinar com a loja.
 
 Os testes automatizados cobrem produção com provedor substituto; nenhuma cobrança real foi feita por eles. O painel financeiro exibe vendas online reais e de teste separadamente; resultado presencial continua exclusivo das lojas físicas.
+
+
+## Confirmação de Pix
+
+O webhook consulta o pagamento na API e só confirma status approved com conta, valor, moeda, referência e modo correspondentes. Pix (payment_method_id=pix, payment_type_id=bank_transfer) sem parcelas ou com 0 é registrado como Pix, 1x. Cartões mantêm a validação de 1 a 6 parcelas.
+
+Em Vendas e financeiro, o botão **Conferir pagamento** consulta o Mercado Pago pelo pedido e busca cada pagamento por ID antes de aplicar as mesmas validações do webhook. A rota exige sessão da equipe e mesma origem; não existe confirmação manual de recebimento online. Sem pagamento registrado/aprovado, o pedido continua Reservado. A consulta não cria cobranças. Pedidos de outro modo não são conciliados com as credenciais atuais. Ainda é necessária uma compra real para comprovar a integração na conta.

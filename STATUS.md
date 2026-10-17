@@ -47,3 +47,8 @@ Confirmado no navegador: o preço de teste R$ 1,00 do Biquíni Brisa — Terraco
 ## Preparação para a compra real
 
 Consulta pública confirmou servidor saudável, modo production, configuração de pagamento presente e produto b1 por 100 centavos. Isso não comprova uma cobrança ou webhook ponta a ponta. Acabamento da sacola, etapas de acompanhamento em Pagamento online, diagnóstico com cores e etiquetas Reservado/Pago/Estornado revisados em desktop e celular sem overflow. Nenhum pedido ou cobrança criado no ambiente publicado durante a revisão. Validar a compra real na volta da pessoa usuária e conferir recebimento no provedor e status Pago no financeiro.
+
+
+## Ajuste da confirmação Pix
+
+Corrigida validação de parcelas para Pix: aceita ausência/null/0/1, registra Pix com 1x. Webhook aceita timestamps em segundos e milissegundos, mantém HMAC e consulta independente. Novo botão Conferir pagamento na gestão consulta a API oficial e não permite marcar manualmente como pago. 12 testes passaram; teste de navegador confirmou consulta e atualização para Pago/Pix com provedor substituto. Não foi acessada conta privada nem confirmado Pix real. O bloqueio de Gerar código no checkout do provedor segue sem causa comprovada e não é resolvido por essa correção de confirmação.
