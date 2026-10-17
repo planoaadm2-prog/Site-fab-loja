@@ -94,3 +94,16 @@ Vendas físicas aparecem como **Loja física**, com nome da unidade, pagamento e
 O botão **Estornar** em uma venda física devolve as peças ao estoque e exclui os valores dos indicadores. A devolução do dinheiro/Pix/cartão é feita fora do sistema e precisa ser conferida pela equipe; nenhum reembolso é enviado à maquininha. O estorno não emite documento fiscal nem fiscaliza devoluções. O sistema registra operação interna, não cobra cartão, não envia Pix e não emite nota fiscal.
 
 A atualização adiciona somente colunas `channel` e `location` ao histórico de pedidos, preservando pedidos, preços, custos e estoque existentes. Pedidos antigos são classificados como online. Testes de migração, concorrência entre checkout/POS, idempotência, pagamento manual, custo histórico e estorno usam bancos descartáveis.
+
+## Mercadorias: cadastro, fotos e reposição
+
+A gestão tem abas **Venda presencial**, **Mercadorias**, **Vendas e financeiro** e **Pagamento online**. Em Mercadorias:
+
+- **Cadastrar mercadoria:** nome, categoria, descrição, preço de venda, custo unitário, foto opcional, cor de referência e até 12 tamanhos personalizados com quantidades iniciais. Tamanhos são separados por vírgulas (ex.: PP, P, M ou 36, 38). Uma mesma tentativa de cadastro não duplica a peça.
+- **Fotos:** JPG, PNG ou WebP de até 10 MB são otimizadas no navegador, mantendo proporções e convertendo para JPEG com fundo branco. O servidor valida formato e limita o arquivo persistido a 512 KB. A foto fica no Turso; não depende do disco temporário da Render. Imagens ocupam a franquia do plano do banco. Sem foto, o site usa a ilustração da categoria.
+- **Entrada de mercadorias:** selecione produto e tamanho, quantidade recebida e motivo. A entrada é somada ao saldo em transação, sem sobrescrever uma venda simultânea. Repetir a mesma tentativa não duplica o saldo. As últimas 50 entradas ficam disponíveis no painel.
+- **Editar mercadoria:** altera nome, categoria, descrição, foto, cor, preço, custo e habilitação das compras online. O saldo por tamanho é somente leitura; novas peças devem entrar pelo formulário de reposição. Alterar custo ou preço não modifica os valores de vendas anteriores.
+
+Novos cadastros ficam automaticamente disponíveis no balcão e no catálogo do site. Sem habilitar compras, aparecem em apresentação (“Em breve”) e não podem ser comprados online. A venda presencial continua possível se houver estoque. O cliente não recebe os custos de aquisição nos endpoints públicos. Produtos não são excluídos pelo painel, preservando o histórico.
+
+A atualização adiciona metadados aos produtos e uma tabela de entradas, preservando os preços, custos, estoques e pedidos existentes. A inicialização não recria nem zera cadastros. Teste de interface completo: `node tests/merchandise-ui.cjs`, com banco descartável e dados fictícios.
