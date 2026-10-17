@@ -27,3 +27,7 @@ As páginas compartilham o estado `virtuosa-business-demo-v1` em localStorage, c
 ## Validação da demonstração
 
 Com Playwright e Chromium disponíveis no ambiente, execute `node tests/demo.cjs`. O teste inicia e encerra seu próprio servidor Python na porta 3020. Valida recusa, três formas de pagamento, parcelamento, soma dos centavos, taxas, custo histórico, despesas, estorno, persistência, CSV, sincronização entre abas, bloqueio de estoque insuficiente e duplicação de pedidos, e layout móvel. Usa dados isolados em um contexto de navegador descartável. O Chromium esperado está em `/usr/bin/chromium`.
+
+## Servidor e gestão protegida (homologação)
+
+Foi adicionada uma aplicação Node 24 + SQLite, com gestão autenticada e Checkout Pro em **modo de teste**. Ela roda separadamente da demonstração do GitHub Pages. Veja [DEPLOY.md](DEPLOY.md) para implantação na Render, variáveis seguras, configuração Mercado Pago, limitações e pendências antes de vendas reais. Execute `npm test` para validar o servidor com banco temporário e provedor substituto.
