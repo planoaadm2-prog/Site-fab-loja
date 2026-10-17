@@ -4,7 +4,7 @@
 
 - Loja com servidor: https://site-fab-loja-1.onrender.com/
 - Gestão protegida: https://site-fab-loja-1.onrender.com/gestao
-- Demonstração independente: https://planoaadm2-prog.github.io/Site-fab-loja/
+- Demonstração independente: https://planoaadm2-prog.github.io/Site-fab-loja/demo.html
 
 ## Salvo e implementado
 
@@ -37,3 +37,7 @@ O diagnóstico autenticado mostra agora o ID retornado pela API `/users/me` e um
 ## Sincronização automática da loja
 
 Vitrine Render recebe notificações das alterações feitas no financeiro em outras abas do mesmo navegador e confere versão do catálogo a cada 15s quando visível para mudanças de outros dispositivos. Usa `/api/catalog-version` com revisão opaca, baixando fotos/catálogo completo somente quando necessário. Atualiza cards, sacola e detalhe aberto. A demonstração GitHub continua independente. Teste dedicado: `node tests/catalog-sync.cjs`.
+
+## Endereços unificados
+
+Confirmado no navegador: o preço de teste R$ 1,00 do Biquíni Brisa — Terracota estava correto na Render, enquanto o GitHub Pages ainda exibia R$ 139,90 da demonstração. O endereço raiz antigo do GitHub passa a redirecionar para a loja da Render. A demonstração local independente fica em `/Site-fab-loja/demo.html`. O servidor Render remove o script de redirecionamento do seu template. Não reverter os preços de teste da pessoa usuária sem instrução.
