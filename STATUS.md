@@ -1,5 +1,9 @@
 # Ponto de retomada
 
+## Painel Kryon
+
+Monitoramento independente disponível em `/kryon`, protegido por `KRYON_PASSWORD`. Mostra se o programa foi usado, último acesso da equipe, última visita à loja e histórico de pedidos, vendas, pagamentos, estoque, produtos, publicações e despesas. Atualiza a cada 5 segundos. É necessário configurar a variável na Render após o deploy.
+
 ## Endereços
 
 - Loja com servidor: https://site-fab-loja-1.onrender.com/

@@ -23,10 +23,13 @@ O banco fica no Turso, não no disco temporário da Render. Reiniciar/reimplanta
 | `TURSO_DATABASE_URL` | URL do banco Turso (`libsql://...` ou `https://...`). |
 | `TURSO_AUTH_TOKEN` | Token do banco, guardado apenas como segredo no servidor. |
 | `ADMIN_PASSWORD` | Senha exclusiva e longa para a equipe, pelo menos 12 caracteres. |
+| `KRYON_PASSWORD` | Senha exclusiva de pelo menos 12 caracteres para o Painel Kryon. Use uma senha diferente da gestão. |
 | `APP_BASE_URL` | Endereço HTTPS do serviço Render, sem caminho ou barra final. Use o endereço atribuído ao serviço e atualize esta variável se necessário. |
 
 5. Publique o serviço. Também é possível criar um **novo Blueprint** a partir de `render.yaml`, que já declara o plano `free`, sem disco.
-6. Confirme `/health` e abra `/gestao`. Entre com a senha, configure preço, custo e estoque. Antes do lançamento comercial, revise também as imagens e informações do catálogo.
+6. Confirme `/health`, abra `/gestao` para a equipe e `/kryon` para o monitoramento independente. Antes do lançamento comercial, revise também as imagens e informações do catálogo.
+
+O Painel Kryon registra entradas da equipe, visitas à loja e as operações auditadas pelo sistema. A sessão é separada da gestão, expira em 8 horas e a tela atualiza automaticamente a cada 5 segundos.
 
 Se a tentativa anterior deixou um serviço com plano/disco pago, a configuração de um **novo** serviço gratuito evita depender da conversão daquele disco. Não remova um serviço ou disco que contenha dados sem backup. A atualização do repositório não altera automaticamente contratos na sua conta Render.
 
